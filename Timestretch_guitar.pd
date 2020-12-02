@@ -1,5 +1,5 @@
 #N canvas 136 23 1080 668 10;
-#X floatatom 877 430 7 0 0 0 - - -, f 7;
+#X floatatom 877 430 7 0 0 0 - - -;
 #N canvas 98 23 821 660 fft-analysis 0;
 #X obj 51 477 *~;
 #X obj 18 477 *~;
@@ -26,7 +26,7 @@
 #X obj 127 622 r window-size;
 #X obj 426 595 r window-size;
 #X obj 426 644 block~;
-#X obj 19 349 +~ 1e-15;
+#X obj 19 349 +~ 1e-015;
 #X obj 19 598 *~;
 #X obj 52 598 tabreceive~ \$0-hann;
 #X obj 127 643 expr 2/(3*$f1);
@@ -55,7 +55,7 @@
 #X text 188 394 reading location (samples);
 #X obj 51 597 / 4;
 #X obj 288 245 * 0.01;
-#X floatatom 340 498 7 0 0 0 - - -, f 7;
+#X floatatom 340 498 7 0 0 0 - - -;
 #X obj 340 474 *;
 #X obj 499 365 r transpo;
 #X obj 499 387 * 0.01;
@@ -90,7 +90,7 @@
 #X obj 194 637 tabread4~ \$0-sample;
 #X obj 528 586 r rewind;
 #X msg 528 744 \; location \$1;
-#X floatatom 111 187 5 0 0 0 - - -, f 5;
+#X floatatom 111 187 5 0 0 0 - - -;
 #X obj 102 115 t f b;
 #X obj 142 139 samplerate~;
 #X obj 102 208 / 4;
@@ -134,7 +134,7 @@ by "location". If "speed" is nonzero \, "location" automatically precesses.
 #X obj 465 222 spigot;
 #X msg 605 236 0;
 #X obj 605 259 s speed;
-#X floatatom 554 194 5 0 0 0 - - -, f 5;
+#X floatatom 554 194 5 0 0 0 - - -;
 #X obj 499 130 r see-loc;
 #X obj 178 347 samplerate~;
 #X text 251 344 <-!!!!! Adapted (different in Miller's patch);
@@ -237,7 +237,7 @@ sound.;
 #X obj 89 69 *~;
 #X obj 89 91 +~;
 #X obj 159 94 q8_rsqrt~;
-#X obj 159 71 +~ 1e-20;
+#X obj 159 71 +~ 1e-020;
 #X obj 73 119 *~;
 #X obj 19 118 *~;
 #X obj 181 290 r lock;
@@ -250,14 +250,14 @@ sound.;
 #X obj 19 325 +~;
 #X obj 125 331 +~;
 #X text 247 66 divide by the magnitude to make a unit-magnitude complex
-amplitude (phase only). The 1e-20 is to prevent overflows. q8_rsqrt~
+amplitude (phase only). The 1e-020 is to prevent overflows. q8_rsqrt~
 is reciprocal square root.;
 #X text 247 165 Take FT of the window in back. Multiply its conjugate
 by the normalized previous output. The result has the magnitude of
 the input sound and phase (previous output phase) minus (back window
 phase).;
 #X text 249 370 Normalize again \, this time taking care to salt each
-channel with 1e-15 so that we get a unit complex number even if everything
+channel with 1e-015 so that we get a unit complex number even if everything
 was zero heretofore.;
 #X text 288 427 Now take the FT of the forward window and multiply
 it by the unit complex number from above. The magnitude will be that
@@ -422,7 +422,7 @@ and window-msec (analysis window size in seconds and msec).;
 #X connect 19 1 4 0;
 #X connect 19 1 18 0;
 #X restore 792 598 pd hann-window;
-#N canvas 71 309 743 255 insample 0;
+#N canvas 959 430 743 255 insample 1;
 #N canvas 1 78 450 300 (subpatch) 0;
 #X array \$0-sample 4800 float 0;
 #X coords 0 0.5 4799 -0.5 400 150 1 0 0;
@@ -462,10 +462,10 @@ and window-msec (analysis window size in seconds and msec).;
 #X obj 951 452 s speed;
 #X msg 788 409 2048;
 #X obj 788 453 s window-size;
-#N canvas 209 40 1157 663 entrailles 1;
+#N canvas 16 155 1157 663 entrailles 1;
 #X obj 297 495 line~;
 #X obj 501 251 pack 0 0;
-#X floatatom 698 155 5 0 0 0 - - -, f 5;
+#X floatatom 698 155 5 0 0 0 - - -;
 #X text 603 225 Portamento;
 #X obj 501 278 line;
 #X obj 501 176 -;
@@ -521,8 +521,8 @@ and window-msec (analysis window size in seconds and msec).;
 #X obj 330 215 snapshot~;
 #X obj 402 161 metro 1;
 #X obj 337 110 hsl 128 15 0 10 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 6350 1;
-#X obj 388 20 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+-1 -1 12700 1;
+#X obj 388 20 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
 #X obj 338 169 *~ 30;
 #X obj 231 79 expr 1-$f1;
@@ -545,14 +545,14 @@ and window-msec (analysis window size in seconds and msec).;
 #X connect 12 0 9 0;
 #X connect 13 0 8 0;
 #X restore 565 329 pd tremolo;
-#X obj 529 39 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+#X obj 529 39 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
 #X obj 551 39 hsl 128 15 0 10 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 6350 1;
+-1 -1 12700 1;
 #X obj 377 378 t b b;
 #X obj 247 365 t b b;
 #X obj 296 612 *~ 1;
-#X msg 294 397 4;
+#X msg 294 397 36;
 #N canvas 297 341 660 300 set 0;
 #X obj 113 26 inlet;
 #X obj 132 213 outlet;
@@ -597,14 +597,14 @@ and window-msec (analysis window size in seconds and msec).;
 #X text 898 461 Record and play;
 #X text 898 478 everytime the strings are plucked.;
 #X obj 1042 31 vsl 15 128 30 70 0 0 empty empty empty 0 -9 0 10 -262144
--1 -1 12700 1;
-#X floatatom 1044 168 5 0 0 0 - - -, f 5;
+-1 -1 700 1;
+#X floatatom 1044 168 5 0 0 0 - - -;
 #X text 1060 44 Sensitivity;
 #X obj 141 64 s~ audio_guitar;
 #X obj 908 16 r~ audio_guitar;
 #X obj 1057 7 inlet;
 #X text 825 624 GuitarExtended \, Pierre Massat \, 2012;
-#X floatatom 845 125 5 0 0 0 - - -, f 5;
+#X floatatom 845 125 5 0 0 0 - - -;
 #X obj 396 355 spigot;
 #X obj 156 296 spigot;
 #X obj 201 271 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
@@ -620,7 +620,7 @@ and window-msec (analysis window size in seconds and msec).;
 #X text 7 330 mode \, we ignore launch-sustain \,;
 #X text 6 343 portamento-sustain and;
 #X text 6 357 stop-record-sustain calls;
-#X floatatom 831 55 5 0 0 0 - - -, f 5;
+#X floatatom 831 55 5 0 0 0 - - -;
 #X obj 42 474 vsl 15 128 0 1 0 0 empty empty teste_ruidos 0 -9 0 10
 -260097 -1 -1 0 1;
 #X obj 52 620 hsl 128 15 50 1000 0 0 empty empty teste_ruidos_50-1000
@@ -764,12 +764,12 @@ and window-msec (analysis window size in seconds and msec).;
 #X obj 15 550 clip~ -1 1;
 #X obj 877 378 loadbang;
 #X msg 877 407 25;
-#X obj 393 76 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+#X obj 393 76 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
-#X obj 573 76 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+#X obj 573 76 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
 1;
 #X obj 427 75 hsl 128 15 0 10 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 6350 1;
+-1 -1 12700 1;
 #X obj 371 12 inlet;
 #X obj 491 11 inlet;
 #X obj 597 15 inlet;
@@ -801,7 +801,7 @@ and window-msec (analysis window size in seconds and msec).;
 #X obj 667 16 inlet;
 #X text 646 44 Sensitivity;
 #X obj 586 98 hsl 128 15 30 70 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 12700 1;
+-1 -1 0 1;
 #X text 340 642 GuitarExtended \, Pierre Massat \, 2012;
 #X text 338 627 (Adapted from Miller Puckette's phase vocoder example)
 ;

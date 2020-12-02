@@ -1,20 +1,20 @@
-#N canvas 215 88 617 538 10;
+#N canvas 627 211 617 538 10;
 #X obj 130 2 adc~;
-#X obj 81 398 dac~;
-#N canvas 916 23 450 455 GUI 0;
+#X obj 93 383 dac~;
+#N canvas 1195 73 450 455 GUI 0;
 #X obj 13 249 Timestretch_guitar;
-#X obj 107 110 tgl 15 0 empty vibrato Vibrato 17 7 0 10 -262144 -1
+#X obj 107 134 tgl 15 0 empty vibrato Vibrato 17 7 0 10 -261234 -1
 -1 1 1;
-#X obj 107 134 tgl 15 0 empty portamento Portamento 17 7 0 10 -262144
+#X obj 174 109 tgl 15 0 empty portamento Portamento 17 7 0 10 -204800
 -1 -1 0 1;
-#X obj 109 169 hsl 128 15 0 10 0 1 empty speed_ctrl Speed -2 -8 0 10
--261234 -1 -1 6350 1;
-#X obj 203 121 tgl 15 0 empty synth_on_off On/Off 0 -7 0 10 -262144
--1 -1 1 1;
+#X obj 109 178 hsl 138 15 0 10 0 1 empty speed_ctrl Vibrato_Speed -2
+-8 0 10 -261234 -1 -1 6850 1;
+#X obj 107 109 tgl 15 0 empty synth_on_off On/Off 17 7 0 10 -4034 -1
+-1 1 1;
 #X obj 91 20 inlet~;
 #X obj 105 401 outlet~;
-#X obj 108 225 hsl 128 10 30 70 0 0 empty sensitivity Sensitivity -2
--8 0 10 -262130 -1 -1 6350 1;
+#X obj 109 216 hsl 138 15 30 70 0 0 empty sensitivity Sensitivity -2
+-8 0 10 -262130 -1 -1 6850 1;
 #X obj 88 359 *~;
 #X obj 206 360 *~;
 #X obj 221 339 line~;
@@ -23,6 +23,8 @@
 #X obj 103 315 pack 0 5;
 #X obj 221 294 expr 1-$f1;
 #X text 184 417 GuitarExtended \, Pierre Massat \, 2012;
+#X obj 174 134 tgl 15 0 synth_sustain synth_sustain Sustain 17 7 0
+10 -232576 -1 -1 1 1;
 #X connect 0 0 8 0;
 #X connect 1 0 0 1;
 #X connect 2 0 0 3;
@@ -40,23 +42,16 @@
 #X connect 12 0 10 0;
 #X connect 13 0 11 0;
 #X connect 14 0 12 0;
-#X coords 0 -1 1 1 150 140 2 100 100;
+#X coords 0 -1 1 1 156 140 2 100 100;
 #X restore 63 41 pd GUI;
 #X obj 73 231 r synth_weight;
-#X obj 177 272 expr 1 - $f1;
-#X floatatom 177 335 5 0 0 0 - - -, f 5;
-#X obj 177 314 line;
-#X msg 177 293 \$1 10;
-#X floatatom 53 334 5 0 0 0 - - -, f 5;
-#X obj 53 313 line;
-#X msg 53 291 \$1 10;
-#X text 1 200 processed signal;
+#X floatatom 111 293 5 0 0 0 - - -;
+#X floatatom 77 293 5 0 0 0 - - -;
+#X text 3 200 processed signal;
 #X text 137 200 original signal;
-#X obj 159 356 *~;
-#X obj 35 356 *~;
+#X obj 159 322 *~;
+#X obj 35 322 *~;
 #X text 369 132 Parametros podem ser recebidos tanto;
-#X obj 253 42 tgl 15 0 synth_sustain synth_sustain synth_sustain 17
-7 0 10 -232576 -1 -1 1 1;
 #X obj 253 80 cnv 15 110 100 empty empty empty 20 12 0 14 -260097 -66577
 0;
 #N canvas 895 23 471 382 cook_MIDI 0;
@@ -91,8 +86,8 @@
 #X obj 28 322 s bend;
 #X obj 28 298 expr ($f1 - 8192)*2/8192.;
 #X obj 28 23 ctlin 114;
-#X floatatom 121 336 5 0 0 0 - - -, f 5;
-#X floatatom 189 345 5 0 0 0 - - -, f 5;
+#X floatatom 121 336 5 0 0 0 - - -;
+#X floatatom 189 345 5 0 0 0 - - -;
 #X connect 0 0 1 0;
 #X connect 2 0 3 0;
 #X connect 4 0 2 0;
@@ -120,7 +115,7 @@
 #X connect 26 0 25 0;
 #X connect 26 0 29 0;
 #X connect 27 0 0 0;
-#X restore 272 158 pd cook_MIDI;
+#X restore 271 158 pd cook_MIDI;
 #N canvas 501 23 865 680 cook_OSC 0;
 #X obj 18 71 oscparse;
 #X obj 18 6 loadbang;
@@ -142,16 +137,16 @@
 #X obj 735 141 route gyro;
 #X obj 735 165 unpack f f f;
 #X floatatom 735 211 5 0 0 0 pitch:_1.5(em_pe)_a_-1.5(ponta-cabeca)
-- -, f 5;
-#X floatatom 775 231 5 0 0 0 yaw:_nao_confiavel... - -, f 5;
-#X floatatom 816 253 5 0 0 0 roll:_0_a_fabs(3)f - -, f 5;
+- -;
+#X floatatom 775 231 5 0 0 0 yaw:_nao_confiavel... - -;
+#X floatatom 816 253 5 0 0 0 roll:_0_a_fabs(3)f - -;
 #X obj 351 135 route accel;
 #X obj 351 160 unpack f f f;
-#X floatatom 351 264 5 0 0 0 lateral - -, f 5;
-#X floatatom 391 194 5 0 0 0 vertical - -, f 5;
-#X floatatom 432 291 5 0 0 0 normal - -, f 5;
-#X floatatom 411 368 5 0 0 0 - - -, f 5;
-#X floatatom 492 368 5 0 0 0 - - -, f 5;
+#X floatatom 351 264 5 0 0 0 lateral - -;
+#X floatatom 391 194 5 0 0 0 vertical - -;
+#X floatatom 432 291 5 0 0 0 normal - -;
+#X floatatom 411 368 5 0 0 0 - - -;
+#X floatatom 492 368 5 0 0 0 - - -;
 #X obj 649 326 s speed_ctrl;
 #X obj 649 301 expr ($f1+0.5)*5.0;
 #X obj 649 276 moses -0.5;
@@ -192,20 +187,20 @@ app GyrOSC --;
 #X obj 73 572 route skeleton;
 #X obj 17 597 route head;
 #X msg 17 482 listen 56789;
-#X floatatom 47 681 5 0 0 0 - - -, f 5;
-#X floatatom 79 700 5 0 0 0 - - -, f 5;
+#X floatatom 47 681 5 0 0 0 - - -;
+#X floatatom 79 700 5 0 0 0 - - -;
 #X text 16 461 Angulo da cabeca \, vindo do Kinect;
 #X obj 16 649 unpack s f f f;
 #X obj 109 596 route shoulder_center;
-#X floatatom 164 681 5 0 0 0 - - -, f 5;
-#X floatatom 196 700 5 0 0 0 - - -, f 5;
+#X floatatom 164 681 5 0 0 0 - - -;
+#X floatatom 196 700 5 0 0 0 - - -;
 #X obj 133 649 unpack s f f f;
-#X floatatom 81 799 5 0 0 0 - - -, f 5;
+#X floatatom 81 799 5 0 0 0 - - -;
 #X obj 47 732 expr atan(($f3-$f4)/($f1-$f2));
 #X obj 47 753 * 180;
 #X obj 47 774 / 3.14159;
 #X obj 162 773 expr 0.7*abs($f1)/90.;
-#X floatatom 168 808 5 0 0 0 - - -, f 5;
+#X floatatom 168 808 5 0 0 0 - - -;
 #X obj 230 806 s synth_weight;
 #X connect 0 0 2 0;
 #X connect 1 0 15 0;
@@ -283,7 +278,7 @@ app GyrOSC --;
 #X connect 72 0 69 0;
 #X connect 73 0 74 0;
 #X connect 73 0 75 0;
-#X restore 278 133 pd cook_OSC;
+#X restore 277 133 pd cook_OSC;
 #N canvas 1128 442 238 261 cook_keypress 0;
 #X obj 48 13 keyname;
 #X obj 51 52 spigot;
@@ -311,36 +306,38 @@ app GyrOSC --;
 #X connect 8 0 4 0;
 #X connect 9 0 3 0;
 #X connect 10 0 6 0;
-#X restore 259 108 pd cook_keypress;
-#X text 283 84 Controles;
-#X obj 63 495 writesf~ 2;
-#X msg 18 470 start;
-#X msg 18 493 stop;
+#X restore 258 108 pd cook_keypress;
+#X text 280 84 Controles;
+#X obj 75 495 writesf~ 2;
+#X msg 30 470 start;
+#X msg 30 493 stop;
 #X text 369 148 como MIDI quanto como OSC;
-#X msg 18 514 open /Users/brizolara/Documents/teste_GEPS.wav;
-#X obj 76 250 hsl 64 15 0 1 0 0 empty empty empty -2 -8 0 10 -204786
--1 -1 4410 1;
-#X text 270 359 * GuitarExtended \, Pierre Massat \, 2012;
-#N canvas 0 23 500 207 default_parameters 0;
-#X obj 7 9 cnv 15 485 190 empty empty Default_parameters 20 12 0 14
+#X msg 30 514 open /Users/brizolara/Documents/teste_GEPS.wav;
+#X text 254 359 * GuitarExtended \, Pierre Massat \, 2012;
+#N canvas 0 23 500 223 default_parameters 0;
+#X obj 7 7 cnv 15 485 209 empty empty Default_parameters 20 12 0 14
 -4034 -66577 0;
-#X obj 187 67 line;
-#X obj 187 26 r reset_sensitivity;
-#X msg 187 46 50 10;
-#X obj 187 87 s sensitivity;
-#X obj 340 67 line;
-#X obj 339 155 line;
-#X obj 339 114 r reset_speed_ctrl;
-#X obj 339 175 s speed_ctrl;
-#X obj 340 26 r reset_synth_weight;
-#X obj 340 87 s synth_weight;
-#X obj 22 34 loadbang;
-#X obj 49 67 r reset_all;
-#X msg 340 46 0.7 10;
-#X msg 339 134 5 10;
-#X msg 22 98 \; reset_synth_weight b \; reset_sensitivity b \; reset_speed_ctrl
-b \; vibrato 1 \; portamento 0 \; synth_on_off 1 \; synth_sustain 0
-\; pd dsp 1 \;;
+#X obj 187 74 line;
+#X obj 187 33 r reset_sensitivity;
+#X msg 187 53 50 10;
+#X obj 187 94 s sensitivity;
+#X obj 340 74 line;
+#X obj 339 162 line;
+#X obj 339 121 r reset_speed_ctrl;
+#X obj 339 182 s speed_ctrl;
+#X obj 340 33 r reset_synth_weight;
+#X obj 340 94 s synth_weight;
+#X obj 22 32 loadbang;
+#X obj 49 65 r reset_all;
+#X msg 340 53 0.7 10;
+#X msg 339 141 5 10;
+#X obj 186 162 line;
+#X obj 186 121 r reset_master_vol;
+#X msg 22 97 \; reset_synth_weight b \; reset_sensitivity b \; reset_speed_ctrl
+b \; reset_master_vol b \; vibrato 1 \; portamento 0 \; synth_on_off
+1 \; synth_sustain 0 \; pd dsp 1 \;;
+#X msg 186 141 1 10;
+#X obj 186 182 s master_vol;
 #X connect 1 0 4 0;
 #X connect 2 0 3 0;
 #X connect 3 0 1 0;
@@ -348,37 +345,71 @@ b \; vibrato 1 \; portamento 0 \; synth_on_off 1 \; synth_sustain 0
 #X connect 6 0 8 0;
 #X connect 7 0 14 0;
 #X connect 9 0 13 0;
-#X connect 11 0 15 0;
-#X connect 12 0 15 0;
+#X connect 11 0 17 0;
+#X connect 12 0 17 0;
 #X connect 13 0 5 0;
 #X connect 14 0 6 0;
-#X restore 253 216 pd default_parameters;
-#X text 270 378 * Modified: Tiago Brizolara \, 2017 \; synth_sustain
-- retain last processed sample \; keypress \, OSC \, MIDI controls
-\; synth_weight - dry/wet between clean and processed sound;
+#X connect 15 0 19 0;
+#X connect 16 0 18 0;
+#X connect 18 0 15 0;
+#X restore 253 42 pd default_parameters;
 #X text 369 95 Parameters can be received either;
 #X text 370 111 as MIDI or OSC;
+#N canvas 1477 335 450 300 wet-dry 0;
+#X obj 72 50 expr 1 - $f1;
+#X obj 72 92 line;
+#X msg 72 71 \$1 10;
+#X obj 12 71 line;
+#X msg 12 49 \$1 10;
+#X obj 35 20 hsl 64 15 0 1 0 0 empty empty empty -2 -8 0 10 -204786
+-1 -1 4410 1;
+#X obj 12 113 outlet;
+#X obj 72 113 outlet;
+#X obj 32 2 inlet;
 #X connect 0 0 2 0;
-#X connect 0 0 13 0;
-#X connect 2 0 14 0;
-#X connect 3 0 27 0;
-#X connect 4 0 7 0;
-#X connect 5 0 13 1;
-#X connect 6 0 5 0;
-#X connect 7 0 6 0;
-#X connect 8 0 14 1;
-#X connect 9 0 8 0;
-#X connect 10 0 9 0;
-#X connect 13 0 1 1;
-#X connect 13 0 1 0;
-#X connect 13 0 22 0;
-#X connect 13 0 22 1;
-#X connect 14 0 1 0;
-#X connect 14 0 1 1;
-#X connect 14 0 22 0;
-#X connect 14 0 22 1;
-#X connect 23 0 22 0;
-#X connect 24 0 22 0;
-#X connect 26 0 22 0;
-#X connect 27 0 10 0;
-#X connect 27 0 4 0;
+#X connect 1 0 7 0;
+#X connect 2 0 1 0;
+#X connect 3 0 6 0;
+#X connect 4 0 3 0;
+#X connect 5 0 4 0;
+#X connect 5 0 0 0;
+#X connect 8 0 5 0;
+#X coords 0 -1 1 1 74 32 1 30 6;
+#X restore 73 253 pd wet-dry;
+#X obj 204 267 vsl 15 128 0 2 0 0 empty empty Volume -10 -9 0 10 -4034
+-1 -1 6350 1;
+#X obj 159 342 *~;
+#X obj 35 342 *~;
+#X text 225 386 0;
+#X text 225 321 1;
+#X text 225 263 2;
+#X obj 204 231 r master_vol;
+#X text 254 378 * Modified: Tiago Brizolara \, 2017 \; Sustain - retain
+last processed sample \; Keypress \, OSC \, MIDI controls \; synth_weight
+- dry/wet between clean and processed sound \; Master volume \; and
+tons of GUI improvements;
+#X text 197 322 ---;
+#X connect 0 0 2 0;
+#X connect 0 0 8 0;
+#X connect 2 0 9 0;
+#X connect 3 0 25 0;
+#X connect 8 0 27 0;
+#X connect 9 0 28 0;
+#X connect 17 0 16 0;
+#X connect 18 0 16 0;
+#X connect 20 0 16 0;
+#X connect 25 0 9 1;
+#X connect 25 0 5 0;
+#X connect 25 1 8 1;
+#X connect 25 1 4 0;
+#X connect 26 0 27 1;
+#X connect 26 0 28 1;
+#X connect 27 0 1 1;
+#X connect 27 0 1 0;
+#X connect 27 0 16 1;
+#X connect 27 0 16 0;
+#X connect 28 0 1 0;
+#X connect 28 0 1 1;
+#X connect 28 0 16 0;
+#X connect 28 0 16 1;
+#X connect 32 0 26 0;
