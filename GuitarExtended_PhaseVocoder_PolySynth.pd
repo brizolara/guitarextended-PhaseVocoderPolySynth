@@ -1,7 +1,7 @@
-#N canvas 627 211 617 538 10;
+#N canvas 673 93 617 538 10;
 #X obj 130 2 adc~;
 #X obj 93 383 dac~;
-#N canvas 1195 73 450 455 GUI 0;
+#N canvas 916 73 450 455 GUI 1;
 #X obj 13 249 Timestretch_guitar;
 #X obj 107 134 tgl 15 0 empty vibrato Vibrato 17 7 0 10 -261234 -1
 -1 1 1;
@@ -24,7 +24,8 @@
 #X obj 221 294 expr 1-$f1;
 #X text 184 417 GuitarExtended \, Pierre Massat \, 2012;
 #X obj 174 134 tgl 15 0 synth_sustain synth_sustain Sustain 17 7 0
-10 -232576 -1 -1 1 1;
+10 -232576 -1 -1 0 1;
+#X msg 252 47 \; vibrato 0 \;;
 #X connect 0 0 8 0;
 #X connect 1 0 0 1;
 #X connect 2 0 0 3;
@@ -45,8 +46,8 @@
 #X coords 0 -1 1 1 156 140 2 100 100;
 #X restore 63 41 pd GUI;
 #X obj 73 231 r synth_weight;
-#X floatatom 111 293 5 0 0 0 - - -;
-#X floatatom 77 293 5 0 0 0 - - -;
+#X floatatom 111 293 5 0 0 0 - - -, f 5;
+#X floatatom 77 293 5 0 0 0 - - -, f 5;
 #X text 3 200 processed signal;
 #X text 137 200 original signal;
 #X obj 159 322 *~;
@@ -60,39 +61,46 @@
 #X obj 28 150 expr 10.*$f1/127.;
 #X obj 28 176 s speed_ctrl;
 #X obj 28 125 ctlin 18;
-#X obj 306 16 notein;
-#X obj 306 42 stripnote;
-#X obj 256 73 route 36 37 38 39 40 41 42 43;
-#X obj 256 94 tgl 15 0 empty empty empty 17 7 0 10 -232576 -1 -1 1
+#X obj 256 7 notein;
+#X obj 256 86 stripnote;
+#X obj 256 113 route 36 37 38 39 40 41 42 43;
+#X obj 256 134 tgl 15 0 empty empty empty 17 7 0 10 -232576 -1 -1 0
 1;
-#X obj 256 173 s synth_sustain;
-#X obj 281 194 s portamento;
-#X obj 281 94 tgl 15 0 empty empty empty 17 7 0 10 -260097 -1 -1 0
+#X obj 256 213 s synth_sustain;
+#X obj 281 234 s portamento;
+#X obj 281 134 tgl 15 0 empty empty empty 17 7 0 10 -260097 -1 -1 0
 1;
-#X obj 306 94 tgl 15 0 empty empty empty 17 7 0 10 -4034 -1 -1 1 1
+#X obj 306 134 tgl 15 0 empty empty empty 17 7 0 10 -4034 -1 -1 1 1
 ;
-#X obj 306 214 s vibrato;
-#X obj 314 314 s reset_all;
-#X obj 314 272 s reset_speed_ctrl;
-#X obj 314 293 s reset_synth_weight;
-#X obj 314 251 s reset_sensitivity;
-#X obj 256 114 change;
-#X obj 281 134 change;
-#X obj 306 153 change;
-#X obj 114 221 r synth_sustain;
-#X obj 140 242 r portamento;
-#X obj 166 264 r vibrato;
+#X obj 306 254 s vibrato;
+#X obj 314 354 s reset_all;
+#X obj 314 312 s reset_speed_ctrl;
+#X obj 314 333 s reset_synth_weight;
+#X obj 314 291 s reset_sensitivity;
+#X obj 256 154 change;
+#X obj 281 174 change;
+#X obj 306 193 change;
+#X obj 139 179 r synth_sustain;
+#X obj 139 212 r portamento;
+#X obj 139 245 r vibrato;
 #X obj 28 272 bendin;
 #X obj 28 322 s bend;
 #X obj 28 298 expr ($f1 - 8192)*2/8192.;
 #X obj 28 23 ctlin 114;
-#X floatatom 121 336 5 0 0 0 - - -;
-#X floatatom 189 345 5 0 0 0 - - -;
+#X floatatom 121 336 5 0 0 0 - - -, f 5;
+#X floatatom 189 345 5 0 0 0 - - -, f 5;
+#X msg 139 260 set \$1;
+#X msg 139 227 set \$1;
+#X msg 139 194 set \$1;
+#X obj 238 61 spigot;
+#X obj 301 21 == 10;
+#X obj 315 61 spigot;
 #X connect 0 0 1 0;
 #X connect 2 0 3 0;
 #X connect 4 0 2 0;
-#X connect 5 0 6 0;
-#X connect 5 1 6 1;
+#X connect 5 0 33 0;
+#X connect 5 1 35 0;
+#X connect 5 2 34 0;
 #X connect 6 0 7 0;
 #X connect 7 0 8 0;
 #X connect 7 1 11 0;
@@ -107,14 +115,21 @@
 #X connect 18 0 9 0;
 #X connect 19 0 10 0;
 #X connect 20 0 13 0;
-#X connect 21 0 8 0;
-#X connect 22 0 11 0;
-#X connect 23 0 12 0;
+#X connect 21 0 32 0;
+#X connect 22 0 31 0;
+#X connect 23 0 30 0;
 #X connect 24 0 26 0;
 #X connect 24 0 28 0;
 #X connect 26 0 25 0;
 #X connect 26 0 29 0;
 #X connect 27 0 0 0;
+#X connect 30 0 12 0;
+#X connect 31 0 11 0;
+#X connect 32 0 8 0;
+#X connect 33 0 6 0;
+#X connect 34 0 33 1;
+#X connect 34 0 35 1;
+#X connect 35 0 6 1;
 #X restore 271 158 pd cook_MIDI;
 #N canvas 501 23 865 680 cook_OSC 0;
 #X obj 18 71 oscparse;
@@ -137,16 +152,16 @@
 #X obj 735 141 route gyro;
 #X obj 735 165 unpack f f f;
 #X floatatom 735 211 5 0 0 0 pitch:_1.5(em_pe)_a_-1.5(ponta-cabeca)
-- -;
-#X floatatom 775 231 5 0 0 0 yaw:_nao_confiavel... - -;
-#X floatatom 816 253 5 0 0 0 roll:_0_a_fabs(3)f - -;
+- -, f 5;
+#X floatatom 775 231 5 0 0 0 yaw:_nao_confiavel... - -, f 5;
+#X floatatom 816 253 5 0 0 0 roll:_0_a_fabs(3)f - -, f 5;
 #X obj 351 135 route accel;
 #X obj 351 160 unpack f f f;
-#X floatatom 351 264 5 0 0 0 lateral - -;
-#X floatatom 391 194 5 0 0 0 vertical - -;
-#X floatatom 432 291 5 0 0 0 normal - -;
-#X floatatom 411 368 5 0 0 0 - - -;
-#X floatatom 492 368 5 0 0 0 - - -;
+#X floatatom 351 264 5 0 0 0 lateral - -, f 5;
+#X floatatom 391 194 5 0 0 0 vertical - -, f 5;
+#X floatatom 432 291 5 0 0 0 normal - -, f 5;
+#X floatatom 411 368 5 0 0 0 - - -, f 5;
+#X floatatom 492 368 5 0 0 0 - - -, f 5;
 #X obj 649 326 s speed_ctrl;
 #X obj 649 301 expr ($f1+0.5)*5.0;
 #X obj 649 276 moses -0.5;
@@ -187,20 +202,20 @@ app GyrOSC --;
 #X obj 73 572 route skeleton;
 #X obj 17 597 route head;
 #X msg 17 482 listen 56789;
-#X floatatom 47 681 5 0 0 0 - - -;
-#X floatatom 79 700 5 0 0 0 - - -;
+#X floatatom 47 681 5 0 0 0 - - -, f 5;
+#X floatatom 79 700 5 0 0 0 - - -, f 5;
 #X text 16 461 Angulo da cabeca \, vindo do Kinect;
 #X obj 16 649 unpack s f f f;
 #X obj 109 596 route shoulder_center;
-#X floatatom 164 681 5 0 0 0 - - -;
-#X floatatom 196 700 5 0 0 0 - - -;
+#X floatatom 164 681 5 0 0 0 - - -, f 5;
+#X floatatom 196 700 5 0 0 0 - - -, f 5;
 #X obj 133 649 unpack s f f f;
-#X floatatom 81 799 5 0 0 0 - - -;
+#X floatatom 81 799 5 0 0 0 - - -, f 5;
 #X obj 47 732 expr atan(($f3-$f4)/($f1-$f2));
 #X obj 47 753 * 180;
 #X obj 47 774 / 3.14159;
 #X obj 162 773 expr 0.7*abs($f1)/90.;
-#X floatatom 168 808 5 0 0 0 - - -;
+#X floatatom 168 808 5 0 0 0 - - -, f 5;
 #X obj 230 806 s synth_weight;
 #X connect 0 0 2 0;
 #X connect 1 0 15 0;
@@ -279,22 +294,22 @@ app GyrOSC --;
 #X connect 73 0 74 0;
 #X connect 73 0 75 0;
 #X restore 277 133 pd cook_OSC;
-#N canvas 1128 442 238 261 cook_keypress 0;
+#N canvas 656 23 238 234 cook_keypress 0;
 #X obj 48 13 keyname;
 #X obj 51 52 spigot;
-#X obj 51 85 sel v p o s;
-#X obj 19 154 s vibrato;
-#X obj 43 175 s portamento;
-#X obj 87 216 s synth_sustain;
-#X obj 66 195 s synth_on_off;
-#X obj 111 110 tgl 15 0 empty synth_sustain empty 17 7 0 10 -262144
--1 -1 1 1;
-#X obj 69 110 tgl 15 0 empty portamento empty 17 7 0 10 -262144 -1
--1 0 1;
-#X obj 48 110 tgl 15 0 empty vibrato empty 17 7 0 10 -262144 -1 -1
-1 1;
-#X obj 90 110 tgl 15 0 empty synth_on_off empty 17 7 0 10 -262144 -1
--1 1 1;
+#X obj 48 71 sel v p o s, f 15;
+#X obj 18 124 s vibrato;
+#X obj 43 145 s portamento;
+#X obj 87 186 s synth_sustain;
+#X obj 66 165 s synth_on_off;
+#X obj 113 100 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 69 100 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 48 100 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+1;
+#X obj 91 100 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
 #X connect 0 0 1 1;
 #X connect 0 1 1 0;
 #X connect 1 0 2 0;
@@ -314,7 +329,7 @@ app GyrOSC --;
 #X text 369 148 como MIDI quanto como OSC;
 #X msg 30 514 open /Users/brizolara/Documents/teste_GEPS.wav;
 #X text 254 359 * GuitarExtended \, Pierre Massat \, 2012;
-#N canvas 0 23 500 223 default_parameters 0;
+#N canvas 469 23 500 223 default_parameters 0;
 #X obj 7 7 cnv 15 485 209 empty empty Default_parameters 20 12 0 14
 -4034 -66577 0;
 #X obj 187 74 line;
